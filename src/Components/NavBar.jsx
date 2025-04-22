@@ -6,15 +6,15 @@ const NavBar = () => {
     const navLinks = <>
        <NavLink to='/'  className={({ isActive }) =>
           isActive ? "text-red-500" : ""
-        }>   <li  className="text-2xl lg:mx-1 font-bold ">Home</li></NavLink>
+        }>   <li  className="text-2xl lg:mx-2 font-bold ">Home</li></NavLink>
 
        <NavLink to='/about'  className={({ isActive }) =>
           isActive ? "text-red-500" : ""
-        }> <li  className="text-2xl lg:mx-1 font-bold ">About</li></NavLink>
+        }> <li  className="text-2xl lg:mx-2 font-bold ">About</li></NavLink>
 
        <NavLink to='/contact' className={({ isActive }) =>
           isActive ? "text-red-500" : ""
-        }> <li className="text-2xl font-bold "> Contact</li></NavLink>
+        }> <li className="text-2xl font-bold lg:ml-2"> Contact</li></NavLink>
     
     </>
 
