@@ -1,4 +1,6 @@
 import { NavLink } from "react-router";
+import Banner from "./Banner";
+
 
 
 const NavBar = () => {
@@ -20,6 +22,8 @@ const NavBar = () => {
 
     return (
       
+      <header>
+
         <nav className="navbar bg-green-300 shadow-sm">
   <div className="navbar-start">
     <div className="dropdown">
@@ -52,6 +56,13 @@ const NavBar = () => {
   </div>
 </nav>       
        
+      <div className="my-11">
+
+       <Banner/>
+      </div>
+     
+
+</header>
     );
 };
 

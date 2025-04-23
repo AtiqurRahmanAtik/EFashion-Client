@@ -11,7 +11,7 @@ const Home = () => {
     // console.log(products);
         
         const fetchData = async()=>{
-           await fetch('http://localhost:5000/api/products')
+           await fetch('http://localhost:5000/api/product')
            .then(res=>  res.json())
            .then(data => SetProducts(data))
         }
