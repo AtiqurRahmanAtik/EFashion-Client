@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -18,7 +18,7 @@ const Banner = () => {
 
 
     return (
-        <div>
+        <section>
 
            <Swiper 
       spaceBetween={30}
@@ -79,7 +79,7 @@ const Banner = () => {
       
       
       </Swiper>  
-        </div>
+        </section>
     );
 };
 

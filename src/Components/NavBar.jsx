@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import Banner from "./Banner";
 
 
@@ -52,14 +52,17 @@ const NavBar = () => {
   </div>
 
   <div className="navbar-end">
-    <a className="btn">Button</a>
+    <Link to='/login' className="btn">Login</Link>
   </div>
 </nav>       
        
-      <div className="my-11">
+
+
+{/* Banner Section Here */}
+      <section className="my-11">
 
        <Banner/>
-      </div>
+      </section>
      
 
 </header>
