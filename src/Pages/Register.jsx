@@ -4,7 +4,7 @@ const Register = () => {
   return (
     <section>
       
-      {/* <h1 className="text-center font-bold text-2xl">Please Register Here</h1> */}
+      <h1 className="text-center font-bold text-2xl">Please Register Here</h1>
 
 
 
