@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router";
-import Banner from "./Banner";
+
 
 
 
@@ -17,6 +17,10 @@ const NavBar = () => {
        <NavLink to='/contact' className={({ isActive }) =>
           isActive ? "text-red-500" : ""
         }> <li className="text-2xl font-bold lg:ml-2"> Contact</li></NavLink>
+
+       <NavLink to='/private' className={({ isActive }) =>
+          isActive ? "text-red-500" : ""
+        }> <li className="text-2xl font-bold lg:ml-2"> Private</li></NavLink>
     
     </>
 
@@ -58,11 +62,7 @@ const NavBar = () => {
        
 
 
-{/* Banner Section Here */}
-      <section className="my-11">
 
-       <Banner/>
-      </section>
      
 
 </header>

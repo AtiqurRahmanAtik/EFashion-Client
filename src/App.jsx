@@ -7,6 +7,7 @@ import About from './Components/About'
 import Contacts from './Components/Contacts';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
+import Private from './Components/Private';
 
 
 
@@ -25,6 +26,7 @@ function App() {
       <Route path='/' element={<Home/>}></Route>
       <Route path='/about' element={<About/>}></Route>
       <Route path='/contact' element={<Contacts/>}></Route>
+      <Route path='/private' element={<Private/>}></Route>
 
       </Route>
 

@@ -2,7 +2,26 @@ import { Link } from "react-router";
 import loginImage from "../assets/login.jpg";
 
 
+
 const Login = () => {
+
+    const handleSubmit = (e)=>{
+
+
+      e.preventDefault();
+      const form = e.target;
+      
+      const email = form.email.value;
+      const password = form.password.value;
+
+      const LoginUserInfo = {email,password};
+
+      console.log(LoginUserInfo);
+
+      fetch('jalkjaaj', LoginUserInfo)
+
+    }
+
     return (
     
 
@@ -22,7 +41,7 @@ const Login = () => {
   <div className=" lg:w-2/5 mx-auto  bg-base-100  shrink-0 shadow-2xl">
     <div className="card-body text-center">
 
-     <form className="fieldset ">
+     <form onSubmit={handleSubmit} className="fieldset ">
 
       <div>
             <h1 className="text-center font-bold text-2xl">Please Login Here</h1>
