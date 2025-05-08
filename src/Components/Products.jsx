@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCard } from "../Features/productSlice";
+import { addToCard, singleProductFetch } from "../Features/productSlice";
+import { Link } from "react-router";
 
 
 const Products = ({item}) => {
@@ -10,13 +11,15 @@ const Products = ({item}) => {
     const {cardProduct,product,isLoading, error}  = useSelector((state)=>(state.productR));
 
 
-    const {ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime} = item;
+    const {_id,ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime} = item;
 
     const handleAddCard = (product)=>{
       // console.log(product)
       dispatch(addToCard(product));
     }
 
+
+   
 
     if(isLoading){
       return <>
@@ -46,6 +49,11 @@ const Products = ({item}) => {
 
     <div className="text-center">
       <button onClick={()=>handleAddCard(item)} className="btn bg-green-500 rounded-4xl text-2xl hover:bg-red-500">Add To Card</button>
+
+     <Link to={`/product/${_id}`}>
+     <button  className="btn bg-green-500 rounded-4xl text-2xl hover:bg-red-500">Details</button>
+     </Link>
+
     </div>
   </div>
 </div>

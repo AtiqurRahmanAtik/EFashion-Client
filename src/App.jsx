@@ -8,6 +8,7 @@ import Contacts from './Components/Contacts';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Private from './Components/Private';
+import SingleProduct from './Components/SingleProduct';
 
 
 
@@ -24,6 +25,7 @@ function App() {
 
       <Route path='/' element={<Main/>}>
       <Route path='/' element={<Home/>}></Route>
+      <Route path='/product/:id' element={<SingleProduct/>}></Route>
       <Route path='/about' element={<About/>}></Route>
       <Route path='/contact' element={<Contacts/>}></Route>
       <Route path='/private' element={<Private/>}></Route>

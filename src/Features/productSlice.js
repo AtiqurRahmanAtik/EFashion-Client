@@ -27,6 +27,26 @@ const initialState = {
     }
   }) 
 
+
+//   single Product Get api here 
+
+export const singleProductFetch = createAsyncThunk ('product/singleProductFetch', async(data)=>{
+
+    // console.log(data)
+
+    try{
+        const product = await axios.get(`http://localhost:5000/api/product/${data}`);
+       
+        console.log(product)
+
+        return  await product.data;
+    }
+    catch(err){
+        console.error(err);
+    }
+  }) 
+
+
      
   
 
@@ -70,7 +90,18 @@ const initialState = {
         .addCase(productFetch.rejected, (state,action)=>{
             state.isLoading = false,
             state.error = action.error.message;
-        })
+        });
+
+        builder.addCase(singleProductFetch.pending , (state)=>{
+            state.isLoading = true;
+           
+        }).addCase(singleProductFetch.fulfilled, (state, action)=>{
+            state.isLoading = false;
+            state.product =action.payload;
+        })  .addCase(singleProductFetch.rejected, (state,action)=>{
+            state.isLoading = false,
+            state.error = action.error.message;
+        });
     }
 
 

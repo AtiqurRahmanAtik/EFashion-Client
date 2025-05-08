@@ -34,6 +34,9 @@ export const createUserFetch = createAsyncThunk('user/createUserFetch', async(us
        
         const result = await createUser.data;
         console.log(result)
+        if(result){
+            alert('register successfull')
+        }
 
         return result;
     }
@@ -41,6 +44,8 @@ export const createUserFetch = createAsyncThunk('user/createUserFetch', async(us
         console.error(err);
     }
 })
+
+
 
 
 
