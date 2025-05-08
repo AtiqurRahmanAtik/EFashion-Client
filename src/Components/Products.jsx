@@ -1,10 +1,28 @@
+import { useDispatch, useSelector } from "react-redux";
+import { addToCard } from "../Features/productSlice";
 
 
 const Products = ({item}) => {
-    console.log(item);
+    // console.log(item);
+
+    const dispatch = useDispatch();
+
+    const {cardProduct,product,isLoading, error}  = useSelector((state)=>(state.productR));
+
 
     const {ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime} = item;
 
+    const handleAddCard = (product)=>{
+      // console.log(product)
+      dispatch(addToCard(product));
+    }
+
+
+    if(isLoading){
+      return <>
+      <h1>Loading ............</h1>
+      </>
+    }
   
     return (
         
@@ -23,6 +41,11 @@ const Products = ({item}) => {
     <div className="card-actions justify-center my-2">
       <div className="badge badge-outline">Fashion</div>
       <div className="badge badge-outline">Products</div>
+    </div>
+
+
+    <div className="text-center">
+      <button onClick={()=>handleAddCard(item)} className="btn bg-green-500 rounded-4xl text-2xl hover:bg-red-500">Add To Card</button>
     </div>
   </div>
 </div>

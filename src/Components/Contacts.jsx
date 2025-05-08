@@ -1,13 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addBooks } from "../Features/BookSlice";
+import { useEffect } from "react";
+import { productFetch } from "../Features/productSlice";
+import Products from "./Products";
+
+
 
 
 const Contacts = () => {
 
-    const book = useSelector((state)=> console.log(state.booksR.books))
+    const book = useSelector((state)=> (state.booksR.books));
     // console.log(book);
 
+    const {product , isLoading ,error} = useSelector((state)=> (state.productR));
+    
+    const {ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime} = product;
+
+   
+
+
+
     const dispatch = useDispatch();
+
+    // fetchProductData here 
+    useEffect(()=>{
+        dispatch(productFetch())
+    },[dispatch]);
+
+
+
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -23,14 +44,20 @@ const Contacts = () => {
 
     }
 
-
+    {isLoading && <><h1>Loading .....</h1></>}
 
     return (
         <div>
-            
-            
 
-              <div className=" lg:w-2/5 mx-auto  bg-base-100  shrink-0 shadow-2xl">
+           
+         
+           
+
+                  
+
+
+
+                <div className=" lg:w-2/5 mx-auto  bg-base-100  shrink-0 shadow-2xl">
                 <div className="card-body text-center">
             
                  <form onSubmit={handleSubmit} className="fieldset ">
@@ -57,6 +84,28 @@ const Contacts = () => {
                   
                 </div>
               </div>
+
+
+
+{/* Product here */}
+                    <div>
+                        <h1 className="text-2xl font-bold text-center my-7">Product Here</h1>
+                    </div>
+
+
+              <div className="grid gap-3 grid-cols-1 lg:grid-cols-3">
+                   {
+                    product?.map((item)=> <Products key={item._id} item={item}></Products>)
+                   }
+              </div>
+             
+
+         
+               
+            
+            
+
+              
         </div>
     );
 };

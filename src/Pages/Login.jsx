@@ -1,9 +1,13 @@
 import { Link } from "react-router";
 import loginImage from "../assets/login.jpg";
+import { useDispatch } from "react-redux";
+import { createUserFetch } from "../Features/userSlice";
 
 
 
 const Login = () => {
+
+  const dispatch = useDispatch();
 
     const handleSubmit = (e)=>{
 
@@ -18,7 +22,11 @@ const Login = () => {
 
       console.log(LoginUserInfo);
 
-      fetch('jalkjaaj', LoginUserInfo)
+      dispatch(createUserFetch(LoginUserInfo))
+
+
+
+     
 
     }
 
@@ -55,13 +63,13 @@ const Login = () => {
             <div className="form-control">
                 <label className="-ml-56 max-md:mr-52  min-lg:-ml-74  max-xl:mr-17 text-2xl 
                 text-black">Password</label> <br />
-                <input type="email" className="input w-3/4 focus:border-none" name="password" placeholder="Enter Your Password Here" />
+                <input type="password" className="input w-3/4 focus:border-none" name="password" placeholder="Enter Your Password Here" />
             </div>
             
         <div><a className="link link-hover lg:text-xl">Forgot password?</a></div>
 
      <div className="">
-     <input className="btn w-2/5 bg-green-500 text-2xl" type="button" value="Login" />
+     <input className="btn w-2/5 bg-green-500 text-2xl" type="submit" value="Login" />
      </div>
       </form>
 

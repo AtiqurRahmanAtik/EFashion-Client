@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router";
 
 
 
 
 const NavBar = () => {
+
 
     const navLinks = <>
        <NavLink to='/'  className={({ isActive }) =>
@@ -23,6 +25,11 @@ const NavBar = () => {
         }> <li className="text-2xl font-bold lg:ml-2"> Private</li></NavLink>
     
     </>
+
+
+    const value = useSelector((state)=>(state.productR.cardProduct));
+
+    console.log(value)
 
     return (
       
@@ -56,6 +63,8 @@ const NavBar = () => {
   </div>
 
   <div className="navbar-end">
+
+    <button className="text-2xl text-red-700 mx-7"> 0</button>
     <Link to='/login' className="btn">Login</Link>
   </div>
 </nav>       

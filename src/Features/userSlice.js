@@ -25,14 +25,15 @@ export const userFetch = createAsyncThunk('user/userFetch', async()=>{
 })
 
 
+// create or post user api here
 export const createUserFetch = createAsyncThunk('user/createUserFetch', async(user)=>{
-        
+        console.log(user)
     try{
 
-        const createUser = await axios.post('https://dummyjson.com/products/add', user);
-        console.log(createUser)
+        const createUser = await axios.post('http://localhost:5000/api/users', user);
+       
         const result = await createUser.data;
-        // console.log(result)
+        console.log(result)
 
         return result;
     }
@@ -68,6 +69,11 @@ export const userSlice = createSlice({
         state.user.push(actions.payload);
         state.error = null
         })
+        .addCase(createUserFetch.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+          });
+    
 
     }
 
