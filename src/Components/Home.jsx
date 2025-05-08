@@ -5,12 +5,25 @@ import Banner from './Banner';
 
 
 
+
 const Home = () => {
 
     const [products, SetProducts] = useState([]);
+
+    // const {product, isLoading , error} = useSelector((state)=> (state.productR))
     
     // console.log(products);
-        
+
+    // const dispatch = useDispatch();
+
+    // fetch using redux 
+    // useEffect(()=>{
+    //     dispatch(productFetch())
+    // },[dispatch])
+
+
+      
+    // fetch data using axios here
         const fetchData = async()=>{
            await fetch('http://localhost:5000/api/product')
            .then(res=>  res.json())
@@ -21,6 +34,9 @@ const Home = () => {
             fetchData();
         },[])
 
+
+
+      
 
     return (
 

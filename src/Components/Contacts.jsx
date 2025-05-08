@@ -9,25 +9,9 @@ import Products from "./Products";
 
 const Contacts = () => {
 
-    const book = useSelector((state)=> (state.booksR.books));
-    // console.log(book);
-
-    const {product , isLoading ,error} = useSelector((state)=> (state.productR));
-    
-    const {ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime} = product;
+   const dispatch = useDispatch();
 
    
-
-
-
-    const dispatch = useDispatch();
-
-    // fetchProductData here 
-    useEffect(()=>{
-        dispatch(productFetch())
-    },[dispatch]);
-
-
 
 
     const handleSubmit = (e)=>{
@@ -44,7 +28,7 @@ const Contacts = () => {
 
     }
 
-    {isLoading && <><h1>Loading .....</h1></>}
+  
 
     return (
         <div>
@@ -84,26 +68,6 @@ const Contacts = () => {
                   
                 </div>
               </div>
-
-
-
-{/* Product here */}
-                    <div>
-                        <h1 className="text-2xl font-bold text-center my-7">Product Here</h1>
-                    </div>
-
-
-              <div className="grid gap-3 grid-cols-1 lg:grid-cols-3">
-                   {
-                    product?.map((item)=> <Products key={item._id} item={item}></Products>)
-                   }
-              </div>
-             
-
-         
-               
-            
-            
 
               
         </div>

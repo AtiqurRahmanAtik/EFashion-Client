@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCard, singleProductFetch } from "../Features/productSlice";
+import { addToCard } from "../Features/productSlice";
 import { Link } from "react-router";
 
 
@@ -25,6 +25,10 @@ const Products = ({item}) => {
       return <>
       <h1>Loading ............</h1>
       </>
+    }
+
+    if(error){
+      console.error(error);
     }
   
     return (
