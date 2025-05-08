@@ -9,23 +9,59 @@ const initialState = {
 }
 
 
-export const userFetch = createAsyncThunk('user/userFetch', async()=>{
+       export const userFetch = createAsyncThunk('user/userFetch',async()=>{
+            try{
+                    const user = await axios.get('http://localhost:5000/api/users');
 
-    try{
+                    const res = await user.data;
+                    return res;
+            }
+            catch(err){
+                console.log(err);
+            }
+        })
 
-        const user = await axios.get('https://jsonplaceholder.typicode.com/users');
-        const result = await user.data;
-        // console.log(result)
+        // singleUser Delete here 
 
-        return result;
-    }
-    catch(err){
-        console.error(err);
-    }
-})
+     export  const userDeleteFetch = createAsyncThunk('user/userDeleteFetch', async(id)=>{
+
+        
+            try{
+                    const user = await axios.delete(`http://localhost:5000/api/users/${id}`);
+
+                   
+
+                  
+                    console.log(user.data)
+
+                    return  id;
+            }
+            catch(err){
+                console.log(err)
+            }
+        })
+
+// export const userFetch = createAsyncThunk('user/userFetch', async()=>{
+
+//     try{
+
+//         const user = await axios.get('https://jsonplaceholder.typicode.com/users');
+//         const result = await user.data;
+//         // console.log(result)
+
+//         return result;
+//     }
+//     catch(err){
+//         console.error(err);
+//     }
+// })
+
+
 
 
 // create or post user api here
+
+
 export const createUserFetch = createAsyncThunk('user/createUserFetch', async(user)=>{
         console.log(user)
     try{
@@ -67,7 +103,7 @@ export const userSlice = createSlice({
             state.loading = false;
             state.error = actions.error.message;
         });
-
+        
         builder.addCase(createUserFetch.fulfilled, (state, actions)=>{
           
         state.loading = false;
@@ -78,7 +114,25 @@ export const userSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
           });
-    
+
+          
+          builder.addCase(userDeleteFetch.pending , (state)=>{
+            state.loading = true;
+        })
+        .addCase(userDeleteFetch.fulfilled, (state, action)=>
+       
+            {
+                // console.log(action.payload);
+            state.loading = false;
+            state.user = state.user.filter((item) => item._id !==action.payload);
+         
+
+
+            state.error = null;
+            }).addCase(userDeleteFetch.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+              });
 
     }
 
