@@ -1,10 +1,13 @@
 import { use, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import   { createUserFetch, userFetch }  from "../Features/userSlice";
+import { useGetProductQuery } from "../Features/ProductApi";
 
 
 const Private = () => {
     const dispatch = useDispatch();
+    const { data : product = [] , isLoading, isError} = useGetProductQuery();
+    console.log(product)
 
      // fetch Data Here 
      useEffect(()=>{
@@ -41,12 +44,12 @@ const Private = () => {
 
     // console.log(user);
 
-    if(loading){
+    if(isLoading){
         return <><h1>Loading .........</h1></>
     }
     
 
-   if(error){
+   if(isError){
     return <><h1>Error .....</h1></>
    }
 
