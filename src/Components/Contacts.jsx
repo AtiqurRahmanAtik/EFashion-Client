@@ -3,13 +3,22 @@ import { addBooks } from "../Features/BookSlice";
 
 
 import { useEffect } from "react";
-import { userDeleteFetch, userFetch } from "../Features/userSlice";
-import { useFetcher } from "react-router";
+import { userDeleteFetch, userFetch } from "../Features/userSlice.js";
+import { useGetUserQuery } from "../Features/Counter/userApiSlice.js";
+
+
+
+
 
 
 
 
 const Contacts = () => {
+
+  // using RTK Query Here 
+    const res = useGetUserQuery();
+    
+    console.log(res);
 
    const dispatch = useDispatch();
 
@@ -19,6 +28,11 @@ const Contacts = () => {
     useEffect(()=>{
         dispatch(userFetch())
     },[dispatch])
+
+
+    
+
+    
 
    
 

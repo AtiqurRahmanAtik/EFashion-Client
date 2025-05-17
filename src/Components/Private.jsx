@@ -2,25 +2,27 @@ import { use, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import   { createUserFetch, userFetch }  from "../Features/userSlice";
 import { useGetProductQuery } from "../Features/ProductApi";
+import Products from "./Products";
 
 
 const Private = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+
     const { data : product = [] , isLoading, isError} = useGetProductQuery();
     console.log(product)
 
-     // fetch Data Here 
-     useEffect(()=>{
-        dispatch(userFetch());
+     // fetch Data Here by redux toolkit
+    //  useEffect(()=>{
+    //     dispatch(userFetch());
         
-    },[dispatch]);
+    // },[dispatch]);
 
-    const user = useSelector((state)=> state.userR.user
-    );
+    // const user = useSelector((state)=> state.userR.user
+    // );
 
-    const loading = useSelector((state)=> console.log(state.userR.loading))
+    // const loading = useSelector((state)=> console.log(state.userR.loading))
 
-    const error = useSelector((state)=> console.log(state.userR.error))
+    // const error = useSelector((state)=> console.log(state.userR.error))
 
 
 
@@ -35,9 +37,9 @@ const Private = () => {
             const body = form.body.value;
     
             const userInfo = {title,body};
-            // console.log(userInfo);
+            console.log(userInfo);
     
-            dispatch(createUserFetch(userInfo));
+            // dispatch(createUserFetch(userInfo));
     
     
         }
@@ -59,9 +61,9 @@ const Private = () => {
 
 
         <div > {
-            user && user.length > 0 &&
+            product && product.length > 0 &&
             
-                <h1 className="text-center font-bold text-2xl my-7 capitalize text-red-600"> this is about components  : {user?.length}</h1>
+                <h1 className="text-center font-bold text-2xl my-7 capitalize text-red-600"> this is about components  : {product.length}</h1>
         }
         </div>
 
@@ -93,6 +95,15 @@ const Private = () => {
                   </form>
                   
                 </div>
+              </div>
+
+
+            {/* product here */}
+              <div className="grid gap-5 grid-cols-1 mg:grid-cols-2 lg:grid-cols-3">
+
+                    {
+                        product?.slice(0,5).map((item)=> <Products key={item._id} item={item}></Products>)
+                    }
               </div>
        
 
