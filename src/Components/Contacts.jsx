@@ -4,7 +4,9 @@ import { addBooks } from "../Features/BookSlice";
 
 import { useEffect } from "react";
 import { userDeleteFetch, userFetch } from "../Features/userSlice.js";
-import { useGetUserQuery } from "../Features/Counter/userApiSlice.js";
+import {  useDeleteUserMutation, useGetUserQuery } from "../Features/Counter/userApiSlice.js";
+import { Link, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 
 
@@ -16,25 +18,35 @@ import { useGetUserQuery } from "../Features/Counter/userApiSlice.js";
 const Contacts = () => {
 
   // using RTK Query Here 
-    const res = useGetUserQuery();
-    
-    console.log(res);
+    const {data : user= [], isLoading, isError} = useGetUserQuery();
 
+    const [DeleteUser] = useDeleteUserMutation();
+
+    const navigate = useNavigate();
+
+ 
+
+
+    
+    // console.log(res);
+
+
+    // using Redux toolkit
    const dispatch = useDispatch();
 
-   const {user,Loading, error} = useSelector((state)=> state.userR);
 
-//    fetchuserAll data using redux asyckThunk 
-    useEffect(()=>{
-        dispatch(userFetch())
-    },[dispatch])
+//    const {user,Loading, error} = useSelector((state)=> state.userR);
+
+// //    fetchuserAll data using redux asyckThunk 
+//     useEffect(()=>{
+//         dispatch(userFetch())
+//     },[dispatch]);
 
 
     
-
+     
     
 
-   
 
 
     const handleSubmit = (e)=>{
@@ -52,28 +64,51 @@ const Contacts = () => {
     }
 
     // handleDeleteuser here
-    const handleDelete = (id)=>{
+    // const handleDelete = (id)=>{
       
-        dispatch(userDeleteFetch(id))
-        .unwrap()
-        .then(() => alert('User deleted successfully'))
-        .catch((err) => alert(`Error: ${err}`));
+    //     dispatch(userDeleteFetch(id))
+    //     .unwrap()
+    //     .then(() => alert('User deleted successfully'))
+    //     .catch((err) => alert(`Error: ${err}`));
+
+    // }
+
+    const handleDelete = async(id)=>{
+         
+      const res = await DeleteUser(id);
+      // console.log(res);
+
+         if(res.data){
+                 Swal.fire({
+        title: "Successfully Update User",
+        icon: "success",
+        draggable: true
+          });
+              }
+      
+              navigate('/contact');
+
+
+         
 
     }
 
 
-    if(Loading){
-        return <> <h1 className="text-2xl text-red-600">Loading ...........</h1></>
+    if(isLoading){
+        return <> <h1 className="text-2xl text-center text-red-600">Loading ...........</h1></> 
     }
   
-    if(error){
-        return console.error(error)
+    if(isError){
+        return console.error('Error here users : ')
     }
   
+     
 
     return (
         <div>
-
+             
+ 
+{/* Form here */}
                 <div className=" lg:w-2/5 mx-auto  bg-base-100  shrink-0 shadow-2xl">
                 <div className="card-body text-center">
             
@@ -102,6 +137,10 @@ const Contacts = () => {
                 </div>
               </div>
 
+            <div>
+              <h1 className="text-2xl font-bold text-green-500 text-center my-7">All User here</h1>
+            </div>
+
 
         {
             user ? 
@@ -127,8 +166,8 @@ const Contacts = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.password}</td>
-                                <td className=""><div className="btn text-2xl bg-green-600">Update</div></td>
-
+                               <Link to={`user/${user._id}`}> <td className=""><div className="btn text-2xl bg-green-600">Update</div></td> 
+                                </Link>
                                 <td  className=""><div onClick={()=>handleDelete(user._id)} className=" btn text-2xl bg-red-500">Delete</div></td>
                               </tr>)
                             }

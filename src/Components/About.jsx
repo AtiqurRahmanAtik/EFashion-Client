@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { deleteBook, upDateBooks } from "../Features/BookSlice";
+import { deleteBook
+ } from "../Features/BookSlice";
+
 
 
 
@@ -10,6 +12,9 @@ const About = () => {
         // console.log(book);
 
         const dispatch = useDispatch();
+
+
+      
 
        
 
@@ -31,6 +36,8 @@ const About = () => {
         }
 
 
+
+    
 
     return (
 

@@ -2,13 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import Products from './Products';
 import Banner from './Banner';
+import { useGetProductQuery } from '../Features/ProductApi';
 
 
 
 
 const Home = () => {
 
-    const [products, SetProducts] = useState([]);
+       // using RTK Query 
+    const {data :  products =[] , isLoading, isError} =  useGetProductQuery();
+
+    // console.log(products);
+
+
+    // const [products, SetProducts] = useState([]);
 
     // const {product, isLoading , error} = useSelector((state)=> (state.productR))
     
@@ -21,21 +28,33 @@ const Home = () => {
     //     dispatch(productFetch())
     // },[dispatch])
 
+    
+
 
       
     // fetch data using axios here
-        const fetchData = async()=>{
-           await fetch('http://localhost:5000/api/product')
-           .then(res=>  res.json())
-           .then(data => SetProducts(data))
-        }
+        // const fetchData = async()=>{
+        //    await fetch('http://localhost:5000/api/product')
+        //    .then(res=>  res.json())
+        //    .then(data => SetProducts(data))
+        // }
 
-        useEffect(()=>{
-            fetchData();
-        },[])
+        // useEffect(()=>{
+        //     fetchData();
+        // },[])
 
 
-
+    if(isLoading){
+        return <>
+        <h1 className='text-2xl text-center'>Loading...........</h1>
+        </>
+    }
+      
+    if(isError){
+        return <>
+        <h1 className='text-2xl text-center'>Loading...........</h1>
+        </>
+    }
       
 
     return (
@@ -54,7 +73,7 @@ const Home = () => {
 
         <div className=' grid gap-5 justify-items-center items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
             {
-                products.map(item=> <Products key={item._id} item={item}></Products>)
+                products?.map(item=> <Products key={item._id} item={item}></Products>)
             }
         </div>
 

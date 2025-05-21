@@ -9,6 +9,7 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Private from './Components/Private';
 import SingleProduct from './Components/SingleProduct';
+import UpdateUser from './Components/UpdateUser';
 
 
 
@@ -28,6 +29,7 @@ function App() {
       <Route path='/product/:id' element={<SingleProduct/>}></Route>
       <Route path='/about' element={<About/>}></Route>
       <Route path='/contact' element={<Contacts/>}></Route>
+      <Route path='/contact/user/:id' element={<UpdateUser/>}> </Route>
       <Route path='/private' element={<Private/>}></Route>
 
       </Route>

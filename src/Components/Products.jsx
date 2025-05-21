@@ -1,34 +1,51 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addToCard } from "../Features/productSlice";
-import { Link } from "react-router";
+// import { useDispatch, useSelector } from "react-redux";
+// import { addToCard } from "../Features/productSlice";
+// import { Link, useNavigate } from "react-router";
+// import { useGetProductByIdQuery } from "../Features/ProductApi";
+
+import { useNavigate } from "react-router";
+import { useDeleteProductMutation } from "../Features/ProductApi";
+
+
 
 
 const Products = ({item}) => {
+   const {_id,ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime} = item;
     // console.log(item);
+    const navigate = useNavigate();
 
-    const dispatch = useDispatch();
+    const [deleteProduct , {isLoading, isError}] = useDeleteProductMutation();
+    console.log(deleteProduct);
 
-    const {cardProduct,product,isLoading, error}  = useSelector((state)=>(state.productR));
+    // const dispatch = useDispatch();
+
+    // const {cardProduct,product,isLoading, error}  = useSelector((state)=>(state.productR));
+   
+
+    // const handleAddCard = (product)=>{
+    //   // console.log(product)
+    //   dispatch(addToCard(product));
+    // }
 
 
-    const {_id,ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime} = item;
+    // handleSingleProductRouter
+    const handleDetails = (id)=>{
+      // console.log(id);
+      navigate(`/product/${id}`);
 
-    const handleAddCard = (product)=>{
-      // console.log(product)
-      dispatch(addToCard(product));
     }
 
-
+    
    
 
     if(isLoading){
       return <>
-      <h1>Loading ............</h1>
+      <h1 className="text-2xl text-center ">Loading ............</h1>
       </>
     }
 
-    if(error){
-      console.error(error);
+    if(isError){
+      console.error('error product');
     }
   
     return (
@@ -54,9 +71,16 @@ const Products = ({item}) => {
     <div className="text-center">
       <button onClick={()=>handleAddCard(item)} className="btn bg-green-500 rounded-4xl text-2xl hover:bg-red-500">Add To Card</button>
 
-     <Link to={`/product/${_id}`}>
+  
+     {/* <Link to={`/product/${_id}`}>
      <button  className="btn bg-green-500 rounded-4xl text-2xl hover:bg-red-500">Details</button>
      </Link>
+      */}
+
+
+  
+     <button onClick={()=> handleDetails(_id)}  className="btn bg-green-500 rounded-4xl text-2xl hover:bg-red-500">Details</button>
+   
 
     </div>
   </div>

@@ -1,35 +1,56 @@
 
 import { useParams } from "react-router";
+import { useGetProductByIdQuery } from "../Features/ProductApi";
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { singleProductFetch } from "../Features/productSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { singleProductFetch } from "../Features/productSlice";
+// import { useGetProductByIdQuery } from "../Features/ProductApi";
 
 const SingleProduct = () => {
 
     const {id} = useParams();
     // console.log(id)
-    const {ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime    } = useSelector((state)=> (state.productR?.product))
+
+    // const {ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime    } = useSelector((state)=> (state.productR?.product));
 
     
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
 
 
 
-//    fetch data and call function here 
+//   Redux toolkit using fetch data and call function here 
 
-    useEffect(()=>{
+    // useEffect(()=>{
     
-        dispatch(singleProductFetch(id))
+    //     dispatch(singleProductFetch(id))
 
-    },[dispatch,id])
-
-
+    // },[dispatch,id]);
 
 
+
+
+    // using rtk query here fetch single product
+    const {data : singleProduct=[], isLoading , isError} = useGetProductByIdQuery(id);
+
+
+    const {ProductName,BrandName,ProductImage,Description,Price,Category,Ratings,ProductCreationDateTime }= singleProduct;
+
+
+    if(isLoading){
+      return <>
+      <h1 className="text-2xl text-center text-red-500"> Loading ...........</h1>
+      </>
+    }
+
+    if(isError){
+      return <>
+      <h1 className="text-2xl text-center text-green-500"> Error data {isError}</h1>
+      </>
+    }
 
     return (
         <div>
