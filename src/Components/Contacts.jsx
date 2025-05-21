@@ -4,7 +4,7 @@ import { addBooks } from "../Features/BookSlice";
 
 import { useEffect } from "react";
 import { userDeleteFetch, userFetch } from "../Features/userSlice.js";
-import {  useDeleteUserMutation, useGetUserQuery } from "../Features/Counter/userApiSlice.js";
+import {  useDeleteUserMutation, useGetUserQuery, usePostUserMutation } from "../Features/Counter/userApiSlice.js";
 import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
@@ -20,6 +20,12 @@ const Contacts = () => {
   // using RTK Query Here 
     const {data : user= [], isLoading, isError} = useGetUserQuery();
 
+    console.log(user);
+    
+    const [postUser] = usePostUserMutation();
+
+    // console.log(postUser);
+
     const [DeleteUser] = useDeleteUserMutation();
 
     const navigate = useNavigate();
@@ -32,7 +38,7 @@ const Contacts = () => {
 
 
     // using Redux toolkit
-   const dispatch = useDispatch();
+  //  const dispatch = useDispatch();
 
 
 //    const {user,Loading, error} = useSelector((state)=> state.userR);
@@ -49,16 +55,18 @@ const Contacts = () => {
 
 
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault();
         const form = e.target;
-        const title = form.title.value;
-        const body = form.body.value;
+        const email = form.title.value;
+        const password = form.body.value;
 
-        const userInfo = {title,body};
+        const userInfo = {email,password};
         console.log(userInfo);
 
-        dispatch(addBooks(userInfo));
+        // dispatch(addBooks(userInfo));
+        
+      await postUser(userInfo);
 
 
     }
@@ -89,9 +97,8 @@ const Contacts = () => {
               navigate('/contact');
 
 
-         
-
     }
+
 
 
     if(isLoading){

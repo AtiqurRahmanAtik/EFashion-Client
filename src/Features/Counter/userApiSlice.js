@@ -26,6 +26,15 @@ export const userApiSlice =  createApi({
             providesTags: (result, error, id) => [{ type: 'Product', id }],
         }),
 
+        postUser : build.mutation({
+            query : (user) =>({
+                url : 'users',
+                method : 'POST',
+                body : user,
+               
+            })
+        }),
+
         updateUser : build.mutation({
             query : (user)=> ({
              
@@ -53,7 +62,7 @@ export const userApiSlice =  createApi({
 })
 
 
-export const {useGetUserQuery, useGetUserByIdQuery, useUpdateUserMutation,useDeleteUserMutation} = userApiSlice;
+export const {useGetUserQuery,usePostUserMutation, useGetUserByIdQuery, useUpdateUserMutation,useDeleteUserMutation} = userApiSlice;
 
 
 
