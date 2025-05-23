@@ -108,6 +108,10 @@ const Contacts = () => {
     if(isError){
         return console.error('Error here users : ')
     }
+    
+    if(isError){
+        return console.error('Error here users : ')
+    }
   
      
 
